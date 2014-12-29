@@ -2,8 +2,6 @@
 
 @section('main')
 
-<h1><b>Главная</b></h1>                           
-
 <b>Категории</b><br>
 
 @foreach($categories as $category)

@@ -2,10 +2,9 @@
 <html>
     <head>
         <meta charset="utf-8">
-        {{ HTML::script('scripts/jquery-2.1.0.min.js') }}
+        {{ HTML::script('scripts/jquery-2.1.1.min.js') }}
         {{ HTML::script('scripts/bootstrap.min.js') }}
         {{ HTML::style('css/bootstrap.min.css') }}
-        {{ HTML::style('css/style.css') }}
     </head>
 
     <body>
@@ -29,7 +28,7 @@
                                 <a class="navbar-text" href="{{ URL::to('admin_section') }}">Секция администратора</a>
                             @endif
                         @else
-                            <a href="{{ URL::to('session/create') }}">Войти</a> | <a href="{{ URL::to('user/create') }}">Зарегистрироваться</a>
+                            <a href="{{ URL::to('session/create') }}">Войти</a> | <a href="{{ URL::to('user/create') }}">Зарегистрироваться</a> | <a href="{{ URL::to('password/remind') }}">Забыли пароль?</a>
                         @endif
                     </p>
                 </div>

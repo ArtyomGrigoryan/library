@@ -80,6 +80,13 @@
 
 			<div class="form-group"> 
 				<div class="col-sm-6">
+					{{ Form::label('quantity', 'Количество') }}
+					{{ Form::text('quantity', $book->quantity, array('class' => 'form-control')) }}
+				</div>
+			</div>
+
+			<div class="form-group"> 
+				<div class="col-sm-6">
 					{{ Form::label('cover', 'Переплет') }}
 					{{ Form::select('cover', array('Твердый' => 'Твердый', 'Мягкий' => 'Мягкий'), $book->cover) }}
 				</div>
@@ -120,7 +127,11 @@
 			
 			{{ Form::hidden('image', $book->picture) }}
 
-			{{ Form::submit('Редактировать', array('class' => 'btn btn-primary')) }}
+			Если вы не хотите изменять примеры страниц книги, то не выбирайте изображения. Если вы хотите изменить, 
+			то выберите как старые изображения, так и новые
+			{{ Form::file('images[]', array('multiple'=>true)) }}
+
+			{{ Form::submit('Сохранить', array('class' => 'btn btn-primary')) }}
 		{{ Form::close() }}
 
 		@include('partials.errors', $errors)

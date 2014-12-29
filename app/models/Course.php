@@ -15,6 +15,6 @@ class Course extends Eloquent {
 
     public function usefuls()
     {
-    		return $this->belongsToMany('Useful');
+    	return $this->belongsToMany('Useful');
     }
 }

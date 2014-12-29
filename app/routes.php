@@ -35,6 +35,7 @@ Route::group(array('before' => 'auth'), function()
 Route::group(array('before' => 'admin_auth'), function() 
 {
 	Route::resource('book', 'BookController');
+	Route::post('changeQuantityBook/{id}', array('uses' => 'BookController@changeQuantityBook'))->where('id', '[0-9]+');
 	Route::resource('publisher', 'PublisherController');
 	Route::resource('author', 'AuthorController');
 	Route::resource('translator', 'TranslatorController');
@@ -61,3 +62,5 @@ Route::group(array('before' => 'admin_auth'), function()
 });
 
 Route::get('activate/{userId}/{activationCode}', array('uses' => 'UserController@getActivate'));
+
+Route::controller('password', 'RemindersController');

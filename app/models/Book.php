@@ -4,14 +4,15 @@ class Book extends Eloquent {
 
 	protected $guarded = array('id');
 
-	protected $fillable = array('name', 'pages', 'cover', 'date', 'ISBN');
+	protected $fillable = array('name', 'pages', 'cover', 'date', 'quantity', 'ISBN');
 
 	public static $rules = array(
         'name'	=> 'required',
         'pages' => 'required',
         'cover' => 'required',
         'date' 	=> 'required',
-        'ISBN'	=> 'required'
+        'ISBN'	=> 'required',
+        'quantity' =>'required|min:0|Integer'
   	);
 
 	public function publisher()
@@ -86,6 +87,19 @@ class Book extends Eloquent {
 		}
 		$book->publishers()->sync($publishers);
 		$book->usefuls()->sync($usefuls);
+
+		foreach(Input::file('images') as $image) {
+			$destinationPath = '/uploads/books_images/';
+			$imagename = $destinationPath.str_random(12).'.jpg';
+			$uploadflag = $image->move(public_path().$destinationPath, $imagename);
+
+			if($uploadflag) {
+				$uploadedimages[] = $imagename;
+			}
+		}
+
+		$book->images = json_encode($uploadedimages);
+
 		$book->save();
 	}
 
@@ -107,6 +121,7 @@ class Book extends Eloquent {
 		$book = Book::find($id);
 		$category->books()->save($book);
 		$book->picture = Input::get('image');
+		$book->quantity = Input::get('quantity');
 		$book->authors()->detach($authors);
 		$book->authors()->sync($authors);
 		if(Input::has('translators')) {
@@ -117,6 +132,27 @@ class Book extends Eloquent {
 		$book->publishers()->sync($publishers);
 		$book->usefuls()->detach($usefuls);
 		$book->usefuls()->sync($usefuls);
+
+		if(Input::hasFile('images')) {
+			if($book->images) {
+				foreach(json_decode($book->images) as $image) {
+					File::delete(public_path().$image);
+				}
+			}
+
+			foreach(Input::file('images') as $image) {
+				$destinationPath = '/uploads/books_images/';
+				$imagename = $destinationPath.str_random(12).'.jpg';
+				$uploadflag = $image->move(public_path().$destinationPath, $imagename);
+
+				if($uploadflag) {
+					$uploadedimages[] = $imagename;
+				}
+			}
+
+			$book->images = json_encode($uploadedimages);
+		}
+
 		$book->save();
 	}
 }

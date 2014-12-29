@@ -9,5 +9,4 @@ class HomeController extends BaseController {
 
 		return View::make('main')->with(array('categories' => $categories, 'directions' => $directions));
 	}
-
 }

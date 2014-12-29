@@ -57,6 +57,13 @@
 				</div>
 			</div>
 
+			<div class="form-group"> 
+				<div class="col-sm-6">
+					{{ Form::label('quantity', 'Количество') }}
+					{{ Form::text('quantity', null, array('class' => 'form-control')) }}
+				</div>
+			</div>
+
 			<div class="form-group">
 				<div class="col-sm-6">
 					{{ Form::label('usefuls', 'Рекомендуется для') }}
@@ -85,12 +92,14 @@
         		</div>
 			</div>
 
-			{{ Form::label('picture', 'Изображение') }}
+			{{ Form::label('picture', 'Обложка книги') }}
 			{{ Form::file('picture') }}
 
 			<img src="" id="thumb" style="max-width:300px; max-height: 200px; display: block;">
-			
+
 			{{ Form::hidden('image') }}
+
+			{{ Form::file('images[]', array('multiple'=>true)) }}
 
 			{{ Form::submit('Создать', array('class' => 'btn btn-primary')) }}
 		{{ Form::close() }}
@@ -100,6 +109,15 @@
 
 	<div class="error"></div>
 </div>
+
+<!-- Если пользователь неудачно заполнит форму, то ему не надо будет повторно выбирать изображение книги -->
+<script>
+	$(document).ready(function() {
+		if($('input[name=image]').val() != "") {
+			document.getElementById('thumb').setAttribute('src', $('input[name=image]').val());
+		}
+	});
+</script>
 
 @stop
 
