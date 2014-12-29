@@ -10,7 +10,7 @@ class BookController extends BaseController {
 	public function uploadPicture()
 	{
 		$destinationPath = '/uploads/books_images/';
-        $filename = str_random(12).'.jpg';
+        	$filename = str_random(12).'.jpg';
 		Input::file('picture')->move(public_path().$destinationPath, $filename);
 		
 		return Response::json(array('filelink' => $destinationPath.$filename));
