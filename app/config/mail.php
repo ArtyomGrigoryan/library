@@ -54,7 +54,7 @@ return array(
 	|
 	*/
 
-	'from' => array('address' => 'artyomg93@gmail.com', 'name' => 'Artyom'),
+	'from' => array('address' => 'lol', 'name' => 'Artyom'),
 
 	/*
 	|--------------------------------------------------------------------------
@@ -80,7 +80,7 @@ return array(
 	|
 	*/
 
-	'username' => 'artyomg93@gmail.com',
+	'username' => 'lol',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -93,7 +93,7 @@ return array(
 	|
 	*/
 
-	'password' => 'Gulshevich',
+	'password' => 'lol',
 
 	/*
 	|--------------------------------------------------------------------------
